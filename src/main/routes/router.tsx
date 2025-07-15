@@ -10,10 +10,20 @@ export const Router: React.FC = () => {
         <Route path="/" element={<Navigate to="/auth/sign-in" />} />
 
         <Route element={<AuthRoute />}>
-          <Route path='/auth' element={<AuthLayout title="Bem vindo(a)!" description="Acesse sua conta para gerenciar frases e categorias" />}>
+          <Route 
+            path='/auth' 
+            element={
+              <AuthLayout 
+                title="Bem vindo(a)!" 
+                description="Acesse sua conta para gerenciar frases e categorias" 
+              />}
+            >
             <Route path="sign-in" element={<SignInPage />} />
             <Route path="sign-up" element={<h1>Sign up</h1>} />
           </Route>
+        </Route>
+        <Route>
+          <Route path="/dashboard" element={<h1>Dashboard</h1>} />
         </Route>
       </Routes>
     </BrowserRouter>

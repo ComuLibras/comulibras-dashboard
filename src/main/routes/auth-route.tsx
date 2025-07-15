@@ -1,20 +1,12 @@
 
-import type { Roles } from "@/application/domain/accounts/services/dto/account-dto";
 import { makeAuthService } from "@/application/domain/auth/services/make-auth-service";
 import { Navigate, Outlet } from "react-router";
 
-interface IProps {
-  rolesAllowed?: Roles[];
-}
-
-export function AuthRoute({ rolesAllowed }: IProps) {
+export function AuthRoute() {
   const authService = makeAuthService();
-  const { accessToken, role } = authService.getToken();
+  const { accessToken } = authService.getToken();
 
-  if (
-    !accessToken &&
-    (role && rolesAllowed && rolesAllowed?.includes(role))
-  ) {
+  if (accessToken) {
     return <Navigate to="/dashboard" replace />;
   }
 
