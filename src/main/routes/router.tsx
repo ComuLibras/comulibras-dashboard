@@ -24,6 +24,7 @@ export const Router: React.FC = () => {
             >
             <Route path="sign-in" element={<SignInPage />} />
             <Route path="sign-up" element={<h1>Sign up</h1>} />
+            <Route path="forgot-password" element={<h1>Forgot password</h1>} />
           </Route>
         </Route>
         
