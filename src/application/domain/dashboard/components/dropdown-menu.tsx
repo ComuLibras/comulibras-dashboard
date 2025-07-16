@@ -7,6 +7,7 @@ import { SidebarMenuButton, useSidebar } from "@/application/shared/components/u
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
+import { ThemeToggle } from "@/application/shared/components/theme/theme-toggle";
 
 export function DropdownMenuSettings() {
   const navigate = useNavigate();
@@ -67,9 +68,9 @@ export function DropdownMenuSettings() {
         <DropdownMenuLabel>Minha conta</DropdownMenuLabel>
         <DropdownMenuGroup>
         <DropdownMenuSeparator />
-        {/* <DropdownMenuItem asChild>
+        <DropdownMenuItem asChild>
             <ThemeToggle />
-          </DropdownMenuItem> */}
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuItem onClick={() => {
           window.open("http://localhost:3001/api-docs/#/", "_blank");

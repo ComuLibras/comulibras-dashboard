@@ -1,5 +1,5 @@
+import { Logo } from "@/application/shared/components/logo";
 import { Outlet } from "react-router";
-import Logo from "@/application/assets/logo.png";
 
 type Props = {
   title: string;
@@ -10,7 +10,7 @@ export const AuthLayout: React.FC<Props> = ({ title, description }) => {
   return (
     <div className="h-screen w-full flex justify-between items-center">
       <div className="flex items-center flex-col gap-1 w-full">
-        <img src={Logo} alt="logo" />
+        <Logo />
         <div className="max-w-[300px] flex flex-col gap-1 items-center text-center">
           <h1 className="text-3xl font-bold">{title}</h1>
           <p className="text-xl text-muted-foreground">{description}</p>

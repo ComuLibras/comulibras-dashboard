@@ -11,12 +11,11 @@ import {
   useSidebar
 } from "@/application/shared/components/ui/sidebar";
 
-import ComulibrasLogo from '@/application/assets/logo.png';
 import { Separator } from "@/application/shared/components/ui/separator";
-import { cn } from "@/application/shared/lib/utils";
 import { type LucideIcon } from "lucide-react";
 import { NavLink } from "react-router";
 import { NavUser } from "./nav-user";
+import { Logo } from "@/application/shared/components/logo";
 
 export interface Items {
   title: string;
@@ -35,7 +34,7 @@ export function AppSidebar({ items }: Props) {
   return (
     <Sidebar variant="sidebar" collapsible="icon">
       <SidebarHeader className="flex items-center justify-start flex-row" >
-        <img src={ComulibrasLogo} alt="" className={cn("size-24", !open && "size-12")} />
+        <Logo className={["size-24", !open && "size-12"]} />
         <h1 className="text-2xl">
           {open && 'Sinaliza'}
         </h1>
