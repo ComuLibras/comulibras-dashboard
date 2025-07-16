@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { AuthRoute } from './auth-route';
 import { AuthLayout } from '@/application/domain/auth/pages/layout';
 import { SignInPage } from '@/application/domain/auth/pages/sign-in';
+import { DashboardLayout } from '@/application/domain/dashboard/layout';
 
 export const Router: React.FC = () => {
   return (
@@ -22,8 +23,11 @@ export const Router: React.FC = () => {
             <Route path="sign-up" element={<h1>Sign up</h1>} />
           </Route>
         </Route>
-        <Route>
-          <Route path="/dashboard" element={<h1>Dashboard</h1>} />
+        
+        <Route path="dashboard" element={<DashboardLayout />}>
+          <Route path="categories" element={<h1>Categorias</h1>} />
+          <Route path="sentences" element={<h1>Frases</h1>} />
+          <Route path="accounts" element={<h1>Administradores</h1>} />
         </Route>
       </Routes>
     </BrowserRouter>
