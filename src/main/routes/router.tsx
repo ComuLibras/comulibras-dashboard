@@ -3,6 +3,9 @@ import { AuthRoute } from './auth-route';
 import { AuthLayout } from '@/application/domain/auth/pages/layout';
 import { SignInPage } from '@/application/domain/auth/pages/sign-in';
 import { DashboardLayout } from '@/application/domain/dashboard/layout';
+import { AccountsPage } from '@/application/domain/dashboard/accounts/pages';
+import { CategoriesPage } from '@/application/domain/dashboard/categories/pages';
+import { SentencesPage } from '@/application/domain/dashboard/sentences/pages';
 
 export const Router: React.FC = () => {
   return (
@@ -25,9 +28,9 @@ export const Router: React.FC = () => {
         </Route>
         
         <Route path="dashboard" element={<DashboardLayout />}>
-          <Route path="categories" element={<h1>Categorias</h1>} />
-          <Route path="sentences" element={<h1>Frases</h1>} />
-          <Route path="accounts" element={<h1>Administradores</h1>} />
+          <Route path="categories" element={<CategoriesPage />} />
+          <Route path="sentences" element={<SentencesPage />} />
+          <Route path="accounts" element={<AccountsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

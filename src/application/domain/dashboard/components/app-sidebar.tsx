@@ -34,7 +34,7 @@ export function AppSidebar({ items }: Props) {
   return (
     <Sidebar variant="sidebar" collapsible="icon">
       <SidebarHeader className="flex items-center justify-start flex-row" >
-        <Logo className={["size-24", !open && "size-12"]} />
+        <Logo className={["h-fit size-24 transition-all ease-linear", !open && "size-12"]} />
         <h1 className="text-2xl">
           {open && 'Sinaliza'}
         </h1>
