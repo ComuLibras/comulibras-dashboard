@@ -1,4 +1,4 @@
-import { Roles } from '@/application/domain/accounts/services/dto/account-dto';
+import { Roles } from '@/application/domain/dashboard/accounts/services/dto/account-dto';
 import z from 'zod';
 
 export const signInDTO = z.object({

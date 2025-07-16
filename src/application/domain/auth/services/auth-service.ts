@@ -1,6 +1,6 @@
 import { ApiService } from "@/application/shared/services/api-service";
 import { type SignInDTO, type SignInResponse } from "./dto/auth-dto";
-import type { Roles } from "../../accounts/services/dto/account-dto";
+import type { Roles } from "../../dashboard/accounts/services/dto/account-dto";
 
 export class AuthService extends ApiService {
   constructor(
