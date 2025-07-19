@@ -4,9 +4,11 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { FormControl } from "@/application/shared/components/ui/form"
 import { Popover, PopoverContent, PopoverTrigger } from "@/application/shared/components/ui/popover"
 import { cn } from "@/application/shared/lib/utils"
+import type { ClassValue } from "clsx"
 import { Check, ChevronsUpDown } from "lucide-react"
 import { useState } from "react"
 import { type ControllerRenderProps, useFormContext } from "react-hook-form"
+import { AccountRole } from "./account-role"
 
 const roles = Object.values(Roles).map((value) => ({
   label: value,
@@ -15,9 +17,10 @@ const roles = Object.values(Roles).map((value) => ({
 
 interface Props {
   field: ControllerRenderProps<CreateAccountDTO | UpdateAccountDTO, "roleCode">;
+  className?: ClassValue;
 }
 
-export function AccountRoleCombobox({ field }: Props) {
+export function AccountRoleCombobox({ field, className }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const form = useFormContext<CreateAccountDTO>();
 
@@ -30,7 +33,8 @@ export function AccountRoleCombobox({ field }: Props) {
             role="combobox"
             className={cn(
               "w-[200px] justify-between",
-              !field.value && "text-muted-foreground"
+              !field.value && "text-muted-foreground",
+              className,
             )}
           >
             {field.value
@@ -42,7 +46,7 @@ export function AccountRoleCombobox({ field }: Props) {
           </Button>
         </FormControl>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent align="start" className={cn("w-[200px] p-0 left-0", className)}>
         <Command>
           <CommandInput
             placeholder="Search framework..."
@@ -60,7 +64,7 @@ export function AccountRoleCombobox({ field }: Props) {
                     setIsOpen(false)
                   }}
                 >
-                  {role.label}
+                  <AccountRole role={role.value} />
                   <Check
                     className={cn(
                       "ml-auto",

@@ -4,15 +4,9 @@ import { ArrowUpDown } from "lucide-react"
 import { Roles, type Account } from "@/application/domain/dashboard/accounts/services/dto/account-dto"
 import { Button } from "@/application/shared/components/ui/button"
 import { AccountsTableActions } from "./accounts-table-actions"
-import { Icon, type IconProps } from "@/application/shared/components/ui/icon"
+import { Icon } from "@/application/shared/components/ui/icon"
 import { Switch } from "@/application/shared/components/ui/switch"
-
-type RoleIcon = IconProps['name'];
-type RoleLabel = string;
-type Role = {
-  label: RoleLabel;
-  icon: RoleIcon;
-}
+import { AccountRole } from "./account-role"
 
 export const columns: ColumnDef<Account>[] = [
   {
@@ -41,31 +35,8 @@ export const columns: ColumnDef<Account>[] = [
     accessorKey: "role",
     header: "Permissão",
     cell: ({ row }) => {
-
-      const map: Record<Roles, Role> = {
-        [Roles.ADMIN]: {
-          label: "Administrador Geral",
-          icon: "users-round",
-        },
-        [Roles.MANAGER]: {
-          label: "Administrador de frases",
-          icon: "list-video",
-        },
-        [Roles.USER]: {
-          label: "Usuário",
-          icon: "user",
-        },
-      }
-
       const role = row.getValue("role") as Roles;
-      const label = map[role];
-
-      return (
-        <div className="flex items-center gap-2">
-          <Icon name={label.icon} className="size-4" />
-          {label.label}
-        </div>
-      )
+      return <AccountRole role={role} />
     },
   },
   {

@@ -31,64 +31,46 @@ export const AccountsForm: React.FC<Props> = ({ onSubmit, submitLabel, initialVa
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full space-y-8" autoComplete="off">
         <div className="space-y-4">
-
-          <div className="flex justify-between gap-2 items-start">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nome</FormLabel>
-                  <FormControl>
-                    <Input autoComplete="new-name" placeholder="Nome..." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="roleCode"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Função</FormLabel>
-                  <AccountRoleCombobox field={field} />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-
           <FormField
             control={form.control}
-            name="email"
+            name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Nome do administrador</FormLabel>
                 <FormControl>
-                  <Input autoSave="off" autoComplete="new-email" placeholder="email@example.com" {...field} />
+                  <Input disabled={isEditing} autoComplete="new-name" placeholder="Nome..." {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          {!isEditing && (
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Senha</FormLabel>
-                  <FormControl>
-                    <Input autoSave="off" autoComplete="new-password" type="password" placeholder="********" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          )}
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>E-mail do administrador</FormLabel>
+                <FormControl>
+                  <Input disabled={isEditing} autoSave="off" autoComplete="new-email" placeholder="email@example.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="roleCode"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Permissão do administrador</FormLabel>
+                <AccountRoleCombobox className="w-full" field={field} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
 
         <Button type="submit" disabled={(isSubmitted && !isValid) || !isDirty} className="w-full">{submitLabel}</Button>
