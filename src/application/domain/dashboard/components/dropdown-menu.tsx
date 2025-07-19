@@ -79,7 +79,7 @@ export function DropdownMenuSettings() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuItem onClick={() => {
-          window.open("http://localhost:3001/api-docs/#/", "_blank");
+          window.open("http://localhost:3000/api-docs/#/", "_blank");
         }}>
           <Cloud />
           <span>API</span>
