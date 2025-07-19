@@ -23,7 +23,7 @@ export const TableDeleteDialog: React.FC<Props> = ({ title, subtitle, onConfirm 
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction className={buttonVariants({ variant: 'destructive' })} onClick={onConfirm}>
+          <AlertDialogAction className={buttonVariants({ variant: 'destructive', size: 'sm' })} onClick={onConfirm}>
             Remover
           </AlertDialogAction>
         </AlertDialogFooter>

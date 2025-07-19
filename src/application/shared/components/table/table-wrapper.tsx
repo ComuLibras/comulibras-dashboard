@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/application/shared/components/ui/card";
+import { TableProvider } from "../../contexts/table-context";
 
 interface Props {
   title: string;
@@ -11,20 +12,22 @@ export const TableWrapper: React.FC<Props> = (props) => {
   const { title, subtitle, children, renderAddButton } = props;
 
   return (
-    <Card className="w-full">
-      <CardHeader className="flex justify-between items-center">
-        <div className="flex flex-col gap-1">
-          <CardTitle>{title}</CardTitle>
-          <CardDescription>{subtitle}</CardDescription>
-        </div>
+    <TableProvider>
+      <Card className="w-full">
+        <CardHeader className="flex justify-between items-center">
+          <div className="flex flex-col gap-1">
+            <CardTitle>{title}</CardTitle>
+            <CardDescription>{subtitle}</CardDescription>
+          </div>
 
-        {renderAddButton?.()}
-      </CardHeader>
-      <CardContent>
-        <div className="w-full">
-          {children}
-        </div>
-      </CardContent>
-    </Card>
+          {renderAddButton?.()}
+        </CardHeader>
+        <CardContent>
+          <div className="w-full">
+            {children}
+          </div>
+        </CardContent>
+      </Card>
+    </TableProvider>
   )
 };

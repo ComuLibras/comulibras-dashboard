@@ -19,7 +19,7 @@ const FormSubtitle: React.FC<IFormSubtitle> = ({ span, text, to }) => {
   return (
     <h2 className="text-muted-foreground tracking-tighter gap-2 flex">
       {text}
-      <Link className="text-primary font-semibold" to={to}>{span}</Link>
+      <Link className="text-primary font-semibold underline underline-offset-2" to={to}>{span}</Link>
     </h2>
   )
 };

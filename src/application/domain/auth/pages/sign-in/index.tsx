@@ -37,9 +37,10 @@ export const SignInPage: React.FC = () => {
                 <FormLabel>E-mail</FormLabel>
                 <FormControl>
                   <Input 
+                    {...field} 
                     placeholder="example@gmail.com" 
                     leftIcon={<Icon name="mail" />} 
-                    {...field} 
+                    className="h-12"
                   />
                 </FormControl>
                 <FormMessage />
@@ -55,32 +56,35 @@ export const SignInPage: React.FC = () => {
                 <FormLabel>Senha</FormLabel>
                 <FormControl>
                   <PasswordInput 
-                    placeholder="******" 
                     {...field} 
+                    placeholder="******" 
+                    className="h-12"
                   />
                 </FormControl>
                 <div className="flex justify-end">
-                  <Link className="text-right text-xs" to="/auth/forgot-password">Esqueceu sua senha?</Link>
+                  <Link className="text-right text-xs underline underline-offset-2" to="/auth/forgot-password">Esqueceu sua senha?</Link>
                 </div>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <Button type="submit" disabled={!isValid && isSubmitted} className="w-full">
-            Acessar minha conta
-          </Button>
+          <div className="flex flex-col gap-6 mt-6">
+            <Button type="submit" disabled={!isValid && isSubmitted} className="w-full" size="lg">
+              Acessar minha conta
+            </Button>
 
-          <div className="flex items-center justify-center gap-2 w-full">
-            <Separator className="flex-1" />
-            <span className="text-xs text-muted-foreground">Ou</span>
-            <Separator className="flex-1" />
+            <div className="flex items-center justify-center gap-2 w-full">
+              <Separator className="flex-1" />
+              <span className="text-xs text-muted-foreground">Ou</span>
+              <Separator className="flex-1" />
+            </div>
+
+            <Button type="submit" disabled={!isValid && isSubmitted} variant='outline' size="lg" className="w-full">
+              <img src={Google} alt="Google" className="w-8 h-8 mr-2" />
+              Entrar com Google
+            </Button>
           </div>
-
-          <Button type="submit" disabled={!isValid && isSubmitted} variant='outline' className="w-full">
-            <img src={Google} alt="Google" className="w-8 h-8 mr-2" />
-            Entrar com Google
-          </Button>
         </FormWrapper>
       </Form>
     </FormContainer>
