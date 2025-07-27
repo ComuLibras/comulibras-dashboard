@@ -6,7 +6,7 @@ import { Button } from "@/application/shared/components/ui/button"
 import { AccountsTableActions } from "./accounts-table-actions"
 import { Icon } from "@/application/shared/components/ui/icon"
 import { Switch } from "@/application/shared/components/ui/switch"
-import { AccountRole } from "./account-role"
+import { AccountRole } from "../account-role"
 
 export const columns: ColumnDef<Account>[] = [
   {

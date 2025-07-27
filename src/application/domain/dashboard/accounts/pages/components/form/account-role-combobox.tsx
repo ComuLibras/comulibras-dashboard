@@ -8,7 +8,7 @@ import type { ClassValue } from "clsx"
 import { Check, ChevronsUpDown } from "lucide-react"
 import { useState } from "react"
 import { type ControllerRenderProps, useFormContext } from "react-hook-form"
-import { AccountRole } from "./account-role"
+import { AccountRole } from "../account-role"
 
 const roles = Object.values(Roles).map((value) => ({
   label: value,

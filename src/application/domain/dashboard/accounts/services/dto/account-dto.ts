@@ -28,8 +28,8 @@ export const createAccountDTO = z.object({
   name: z.string().min(1, 'Nome é obrigatório'),
   email: z.email('Formato de email inválido'),
   roleCode: z.enum(Roles, { error: 'A permissão do usuário é obrigatória' }),
-  password: z.string().min(8, 'A senha deve ter no mínimo 8 caracteres'),
 });
+
 export type CreateAccountDTO = z.infer<typeof createAccountDTO>;
 export type CreateAccountResponse = Account;
 

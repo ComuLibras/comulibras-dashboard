@@ -16,7 +16,7 @@ import {
   useReactTable
 } from "@tanstack/react-table";
 import { useMemo, useState } from 'react';
-import { AccountsForm } from "./accounts-form";
+import { AccountsForm } from "../form/accounts-form";
 import { columns } from "./accounts-table-columns";
 
 export function AccountsTable() {

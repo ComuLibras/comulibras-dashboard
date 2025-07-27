@@ -1,10 +1,10 @@
 import { Table } from "@/application/shared/components/table";
 import React from "react";
-import { AccountsForm } from "./components/accounts-form";
+import { AccountsForm } from "./components/form/accounts-form";
 import { useTable } from "@/application/shared/hooks/use-table";
 import { useCreateAccount } from "../hooks/use-create-account";
 import type { CreateAccountDTO } from "../services/dto/account-dto";
-import { AccountsTable } from "./components/accounts-table";
+import { AccountsTable } from "./components/table/accounts-table";
 
 export function AccountsPageContent() {
   const { setIsAddDialogOpen } = useTable();
