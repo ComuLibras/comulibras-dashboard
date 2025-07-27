@@ -8,11 +8,11 @@ import { ChevronsUpDown } from "lucide-react"
 import { useState } from "react"
 import { type ControllerRenderProps, useFormContext } from "react-hook-form"
 import { Color } from "./color"
-import type { CreateCategoryBody, UpdateCategoryBody } from "../../../services/dto/categories-dto"
+import type { CreateCategoryBody } from "../../../services/dto/categories-dto"
 import { colorsMap } from "./colorsMap"
 
 interface Props {
-  field: ControllerRenderProps<CreateCategoryBody | UpdateCategoryBody, "color">;
+  field: ControllerRenderProps<CreateCategoryBody, "color">;
   className?: ClassValue;
 }
 

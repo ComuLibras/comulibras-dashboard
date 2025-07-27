@@ -4,21 +4,19 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/application/shared/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/application/shared/components/ui/form";
 import { Input } from "@/application/shared/components/ui/input";
-import { type Category, createCategoryBody, type CreateCategoryBody, updateCategoryBody, type UpdateCategoryBody } from "../../../services/dto/categories-dto";
+import { type Category, createCategoryBody, type CreateCategoryBody } from "../../../services/dto/categories-dto";
 import { ColorCombobox } from "../color-combobox";
 import { IconCombobox } from "../icon-combobox";
 
 interface Props {
-  onSubmit: (dto: CreateCategoryBody | UpdateCategoryBody) => Promise<void>;
+  onSubmit: (dto: CreateCategoryBody) => Promise<void>;
   submitLabel: string;
   initialValues?: Category;
 }
 
 export function CategoriesForm({ onSubmit, submitLabel, initialValues }: Props) {
-  const isEditing = !!initialValues;
-
   const form = useForm({
-    resolver: zodResolver(isEditing ? updateCategoryBody : createCategoryBody),
+    resolver: zodResolver(createCategoryBody),
     defaultValues: initialValues,
   });
 

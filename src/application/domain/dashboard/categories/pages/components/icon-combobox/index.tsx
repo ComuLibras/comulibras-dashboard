@@ -7,12 +7,12 @@ import type { ClassValue } from "clsx"
 import { ChevronsUpDown } from "lucide-react"
 import { useState } from "react"
 import { type ControllerRenderProps, useFormContext } from "react-hook-form"
-import type { CreateCategoryBody, UpdateCategoryBody } from "../../../services/dto/categories-dto"
+import type { CreateCategoryBody } from "../../../services/dto/categories-dto"
 import { IconItem } from "./iconItem"
 import { iconNames } from "lucide-react/dynamic"
 
 interface Props {
-  field: ControllerRenderProps<CreateCategoryBody | UpdateCategoryBody, "icon">;
+  field: ControllerRenderProps<CreateCategoryBody, "icon">;
   className?: ClassValue;
 }
 
