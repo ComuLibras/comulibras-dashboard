@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export enum Roles {
   ADMIN = 'ADMIN',
-  MANAGER = 'SENTENCES_MANAGER',
+  MANAGER = 'SENTENCE_ADMIN',
   USER = 'USER',
 }
 
@@ -27,13 +27,15 @@ export interface GetAccountsResponse {
 export const createAccountDTO = z.object({
   name: z.string().min(1, 'Nome é obrigatório'),
   email: z.email('Formato de email inválido'),
-  roleCode: z.enum(Roles, { error: 'A permissão do usuário é obrigatória' }),
+  role: z.enum(Roles, { error: 'A permissão do usuário é obrigatória' }),
 });
 
 export type CreateAccountDTO = z.infer<typeof createAccountDTO>;
 export type CreateAccountResponse = Account;
 
-export const updateAccountDTO = createAccountDTO.partial();
-export type UpdateAccountDTO = z.infer<typeof updateAccountDTO>;
+export const updateAccountRoleDTO = createAccountDTO.pick({
+  role: true,
+});
+export type UpdateAccountRoleDTO = z.infer<typeof updateAccountRoleDTO>;
 export type UpdateAccountResponse = Account;
 

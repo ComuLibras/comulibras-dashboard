@@ -1,29 +1,29 @@
-import { createAccountDTO, type CreateAccountDTO, updateAccountDTO, type UpdateAccountDTO } from "@/application/domain/dashboard/accounts/services/dto/account-dto";
+import { createAccountDTO, type CreateAccountDTO, Roles } from "@/application/domain/dashboard/accounts/services/dto/account-dto";
 import { Button } from "@/application/shared/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/application/shared/components/ui/form";
 import { Input } from "@/application/shared/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { AccountRoleCombobox } from "./account-role-combobox";
-
+import { Autocomplete } from "@/application/shared/components/auto-complete";
+import { AccountRole } from "../account-role";
 
 interface Props {
-  onSubmit(dto: CreateAccountDTO | UpdateAccountDTO): Promise<void>;
+  onSubmit(dto: CreateAccountDTO): Promise<void>;
   submitLabel: string;
-  initialValues?: UpdateAccountDTO;
+  initialValues?: CreateAccountDTO;
 }
 
 export const AccountsForm: React.FC<Props> = ({ onSubmit, submitLabel, initialValues }) => {
   const isEditing = !!initialValues;
 
-  const form = useForm<CreateAccountDTO | UpdateAccountDTO>({
-    resolver: zodResolver(isEditing ? updateAccountDTO : createAccountDTO),
+  const form = useForm<CreateAccountDTO>({
+    resolver: zodResolver(createAccountDTO),
     defaultValues: initialValues,
   });
 
   const { formState: { isValid, isDirty, isSubmitted } } = form;
 
-  const handleSubmit: SubmitHandler<CreateAccountDTO | UpdateAccountDTO> = async (dto) => {
+  const handleSubmit: SubmitHandler<CreateAccountDTO> = async (dto) => {
     await onSubmit(dto);
   }
 
@@ -62,11 +62,22 @@ export const AccountsForm: React.FC<Props> = ({ onSubmit, submitLabel, initialVa
 
           <FormField
             control={form.control}
-            name="roleCode"
+            name="role"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Permissão do administrador</FormLabel>
-                <AccountRoleCombobox className="w-full" field={field} />
+                <FormControl>
+                  <Autocomplete
+                    value={String(field.value)}
+                    renderButton={(role) => <AccountRole role={role as Roles} />}
+                    items={Object.values(Roles)}
+                    renderItem={(role) => <AccountRole role={role} />}
+                    getValue={(role) => role}
+                    onSelect={(role) => field.onChange(role)}
+                    placeholder="Selecione a função"
+                    emptyMessage="Nenhuma função encontrada."
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}

@@ -1,8 +1,6 @@
 import { Icon, type IconProps } from "@/application/shared/components/ui/icon";
 import { Roles } from "../../services/dto/account-dto";
 
-
-
 type RoleIcon = IconProps['name'];
 type RoleLabel = string;
 type Role = {
@@ -30,12 +28,17 @@ interface Props {
 }
 
 export function AccountRole({ role }: Props) {
-  const label = map[role];
+  console.log(role)
+  const mappedRole = map?.[role];
+
+  if (!mappedRole) {
+    return null;
+  }
 
   return (
     <div className="flex items-center gap-2">
-      <Icon name={label.icon} className="size-4" />
-      {label.label}
+      <Icon name={mappedRole.icon} className="size-4" />
+      {mappedRole.label}
     </div>
   )
 }

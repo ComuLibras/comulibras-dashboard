@@ -2,7 +2,6 @@ import { useGetAccounts } from "@/application/domain/dashboard/accounts/hooks/us
 
 import { useDeleteAccount } from "@/application/domain/dashboard/accounts/hooks/use-delete-account";
 import { useUpdateAccount } from "@/application/domain/dashboard/accounts/hooks/use-update-account";
-import { type UpdateAccountDTO } from "@/application/domain/dashboard/accounts/services/dto/account-dto";
 import { Table } from "@/application/shared/components/table";
 import { useTable } from "@/application/shared/hooks/use-table";
 import {
@@ -18,6 +17,7 @@ import {
 import { useMemo, useState } from 'react';
 import { AccountsForm } from "../form/accounts-form";
 import { columns } from "./accounts-table-columns";
+import type { CreateAccountDTO } from "../../../services/dto/account-dto";
 
 export function AccountsTable() {
   const { accounts } = useGetAccounts();
@@ -51,7 +51,7 @@ export function AccountsTable() {
 
   const { updateAccount } = useUpdateAccount();
 
-  async function handleUpdateAcount(dto: UpdateAccountDTO) {
+  async function handleUpdateAcount(dto: CreateAccountDTO) {
     await updateAccount({ dto, accountId: selectedId! });
 
     setIsEditDialogOpen(false);

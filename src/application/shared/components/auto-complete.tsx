@@ -6,19 +6,21 @@ import { cn } from "@/application/shared/lib/utils"
 import type { ClassValue } from "clsx"
 import { ChevronsUpDown } from "lucide-react"
 import { useState } from "react"
-import { type ControllerRenderProps, useFormContext } from "react-hook-form"
-import type { CreateCategoryBody } from "../../../services/dto/categories-dto"
-import { IconItem } from "./iconItem"
-import { iconNames } from "lucide-react/dynamic"
 
-interface Props {
-  field: ControllerRenderProps<CreateCategoryBody, "icon">;
+interface Props<T> {
+  value: string;
   className?: ClassValue;
+  renderButton: (value: string) => React.ReactNode;
+  items: T[];
+  renderItem: (value: T) => React.ReactNode;
+  onSelect: (value: T) => void;
+  emptyMessage?: string;
+  placeholder?: string;
+  getValue: (value: T) => string;
 }
 
-export function IconCombobox({ field, className }: Props) {
+export function Autocomplete<T>({ value, className, renderButton, items, renderItem, onSelect, emptyMessage, placeholder, getValue }: Props<T>) {
   const [isOpen, setIsOpen] = useState(false);
-  const form = useFormContext<CreateCategoryBody>();
 
   return (
     <Popover modal open={isOpen} onOpenChange={setIsOpen}>
@@ -29,13 +31,13 @@ export function IconCombobox({ field, className }: Props) {
             role="combobox"
             className={cn(
               "w-full justify-between",
-              !field.value && "text-muted-foreground",
+              !value && "text-muted-foreground",
               className,
             )}
           >
-            {field.value
-              ? <IconItem icon={field.value} />
-              : "Selecione o ícone"}
+            {value
+              ? renderButton(value)
+              : placeholder}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </FormControl>
@@ -43,22 +45,22 @@ export function IconCombobox({ field, className }: Props) {
       <PopoverContent align="start" className={cn("w-full p-0 left-0", className)}>
         <Command>
           <CommandInput
-            placeholder="Pesquisar ícone..."
+            placeholder={placeholder}
             className="h-9"
           />
           <CommandList>
-            <CommandEmpty>Nenhum ícone encontrado.</CommandEmpty>
+            <CommandEmpty>{emptyMessage}</CommandEmpty>
             <CommandGroup>
-              {iconNames.map((icon) => (
+              {items.map((item) => (
                 <CommandItem
-                  value={icon}
-                  key={icon}
+                  value={getValue(item)}
+                  key={getValue(item)}
                   onSelect={() => {
-                    form.setValue("icon", icon, { shouldDirty: true })
+                    onSelect(item)
                     setIsOpen(false)
                   }}
                 >
-                  <IconItem icon={icon} />
+                  {renderItem(item)}
                 </CommandItem>
               ))}
             </CommandGroup>

@@ -5,8 +5,11 @@ import { Button } from "@/application/shared/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/application/shared/components/ui/form";
 import { Input } from "@/application/shared/components/ui/input";
 import { type Category, createCategoryBody, type CreateCategoryBody } from "../../../services/dto/categories-dto";
-import { ColorCombobox } from "../color-combobox";
-import { IconCombobox } from "../icon-combobox";
+import { Autocomplete } from "@/application/shared/components/auto-complete";
+import { Color } from "../color-combobox/color";
+import { colorsMap } from "../color-combobox/colorsMap";
+import { iconNames } from "lucide-react/dynamic";
+import { IconItem } from "../icon-combobox/iconItem";
 
 interface Props {
   onSubmit: (dto: CreateCategoryBody) => Promise<void>;
@@ -45,7 +48,16 @@ export function CategoriesForm({ onSubmit, submitLabel, initialValues }: Props) 
               <FormItem className="w-full">
                 <FormLabel>Ícone</FormLabel>
                 <FormControl>
-                  <IconCombobox field={field} />
+                  <Autocomplete
+                    value={field.value}
+                    renderButton={() => <IconItem icon={field.value} />}
+                    items={iconNames}
+                    renderItem={(icon) => <IconItem icon={icon} />}
+                    getValue={(icon) => icon}
+                    onSelect={(icon) => field.onChange(icon)}
+                    placeholder="Selecione o ícone"
+                    emptyMessage="Nenhum ícone encontrado."
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -59,7 +71,16 @@ export function CategoriesForm({ onSubmit, submitLabel, initialValues }: Props) 
               <FormItem className="w-full">
                 <FormLabel>Cor</FormLabel>
                 <FormControl>
-                  <ColorCombobox field={field} />
+                <Autocomplete
+                  value={field.value}
+                  renderButton={() => <Color color={field.value} hideHex />}
+                  items={Object.values(colorsMap)}
+                  renderItem={(color) => <Color color={color.hex} />}
+                  getValue={(color) => color.hex}
+                  onSelect={(color) => field.onChange(color.hex)}
+                  placeholder="Selecione a cor"
+                  emptyMessage="Nenhuma cor encontrada."
+                />
                 </FormControl>
                 <FormMessage />
               </FormItem>
