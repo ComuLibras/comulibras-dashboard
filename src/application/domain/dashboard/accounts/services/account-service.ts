@@ -1,5 +1,4 @@
 import { ApiService } from "@/application/shared/services/api-service";
-import { type GetAccountsParams } from "./accouts-service-types";
 import { type CreateAccountDTO, type CreateAccountResponse, type GetAccountsResponse, type MeResponse, type UpdateAccountDTO, type UpdateAccountResponse } from "./dto/account-dto";
 
 export class AccountService extends ApiService {
@@ -15,13 +14,8 @@ export class AccountService extends ApiService {
     return this.httpClient.get<MeResponse>(`${this.baseUrl}/me`);
   }
 
-  async getAccounts(params?: GetAccountsParams) {
-    return this.httpClient.get<GetAccountsResponse>(this.baseUrl, {
-      params: {
-        page: params?.page ?? 1,
-        perPage: params?.perPage ?? 20,
-      }
-    });
+  async getAccounts() {
+    return this.httpClient.get<GetAccountsResponse>(this.baseUrl);
   }
 
   async createAccount(dto: CreateAccountDTO) {

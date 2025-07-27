@@ -1,9 +1,15 @@
-import { TableWrapper } from "@/application/shared/components/table/table-wrapper";
+import { CreateCategoryButton } from "./components/create-category-button";
+import { CategoriesContent } from "./content";
+import { Table } from "@/application/shared/components/table";
 
 export function CategoriesPage() {
   return (
-    <TableWrapper title="Categorias" subtitle="Gerencie todas as categorias disponíveis" >
-      Oi
-    </TableWrapper>
+    <Table.Wrapper 
+      title="Categorias" 
+      subtitle="Gerencie todas as categorias disponíveis"
+      renderAddButton={() => <CreateCategoryButton />}
+    >
+      <CategoriesContent />
+    </Table.Wrapper>
   )
 }
