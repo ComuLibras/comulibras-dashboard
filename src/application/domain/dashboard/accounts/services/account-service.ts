@@ -1,5 +1,5 @@
 import { ApiService } from "@/application/shared/services/api-service";
-import { type CreateAccountDTO, type CreateAccountResponse, type GetAccountsResponse, type MeResponse, type UpdateAccountRoleDTO, type UpdateAccountResponse } from "./dto/account-dto";
+import { type CreateAccountDTO, type CreateAccountResponse, type GetAccountsResponse, type MeResponse, type UpdateAccountRoleDTO, type UpdateAccountResponse, type UpdateAccountStatusDTO, type UpdateAccountStatusResponse } from "./dto/account-dto";
 
 export class AccountService extends ApiService {
   private readonly baseUrl: string
@@ -24,6 +24,10 @@ export class AccountService extends ApiService {
 
   async updateAccountRole(dto: UpdateAccountRoleDTO, accountId: string) {
     return this.httpClient.patch<UpdateAccountResponse>(`${this.baseUrl}/${accountId}/role`, dto);
+  }
+
+  async updateAccountStatus(dto: UpdateAccountStatusDTO, accountId: string) {
+    return this.httpClient.patch<UpdateAccountStatusResponse>(`${this.baseUrl}/${accountId}/status`, dto);
   }
 
   async deleteAccount(accountId: string) {

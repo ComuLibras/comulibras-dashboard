@@ -3,20 +3,20 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { type HttpAxiosError } from '@/application/shared/clients/http-client';
 import { type AxiosResponse } from 'axios';
 import { toast } from 'sonner';
-import { type UpdateAccountRoleDTO, type UpdateAccountResponse } from '@/application/domain/dashboard/accounts/services/dto/account-dto';
+import { type UpdateAccountStatusDTO, type UpdateAccountResponse } from '@/application/domain/dashboard/accounts/services/dto/account-dto';
 import { makeAccountService } from '@/application/domain/dashboard/accounts/services/make-account-service';
 
-interface UpdateAccountParams {
-  dto: UpdateAccountRoleDTO;
+interface UpdateAccountStatusParams {
+  dto: UpdateAccountStatusDTO;
   accountId: string;
 }
 
-export function useUpdateAccount() {
+export function useUpdateAccountStatus() {
   const accountsService = makeAccountService();
   const queryClient = useQueryClient();
 
-  const { mutateAsync, isPending } = useMutation<AxiosResponse<UpdateAccountResponse>, HttpAxiosError, UpdateAccountParams>({
-    mutationFn: async ({ dto, accountId }) => accountsService.updateAccountRole(dto, accountId),
+  const { mutateAsync, isPending } = useMutation<AxiosResponse<UpdateAccountResponse>, HttpAxiosError, UpdateAccountStatusParams>({
+    mutationFn: async ({ dto, accountId }) => accountsService.updateAccountStatus(dto, accountId),
     onSuccess: () => {
       toast.success('Usuário atualizado com sucesso');
 
@@ -30,7 +30,10 @@ export function useUpdateAccount() {
   });
 
   return {
-    updateAccount: mutateAsync,
+    updateAccountStatus: mutateAsync,
     isLoading: isPending,
   };
 }
+
+export type UseUpdateAccountStatus = ReturnType<typeof useUpdateAccountStatus>;
+

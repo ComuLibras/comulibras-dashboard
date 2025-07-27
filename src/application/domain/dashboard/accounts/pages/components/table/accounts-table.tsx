@@ -1,7 +1,7 @@
 import { useGetAccounts } from "@/application/domain/dashboard/accounts/hooks/use-get-accounts";
 
 import { useDeleteAccount } from "@/application/domain/dashboard/accounts/hooks/use-delete-account";
-import { useUpdateAccount } from "@/application/domain/dashboard/accounts/hooks/use-update-account";
+import { useUpdateAccountRole } from "@/application/domain/dashboard/accounts/hooks/use-update-account-role";
 import { Table } from "@/application/shared/components/table";
 import { useTable } from "@/application/shared/hooks/use-table";
 import {
@@ -16,8 +16,9 @@ import {
 } from "@tanstack/react-table";
 import { useMemo, useState } from 'react';
 import { AccountsForm } from "../form/accounts-form";
-import { columns } from "./accounts-table-columns";
+import { getAccountColumns } from "./accounts-table-columns";
 import type { CreateAccountDTO } from "../../../services/dto/account-dto";
+import { useUpdateAccountStatus } from "../../../hooks/use-update-account-status";
 
 export function AccountsTable() {
   const { accounts } = useGetAccounts();
@@ -27,9 +28,11 @@ export function AccountsTable() {
   const [columnVisibility, setColumnVisibility] =
     useState<VisibilityState>({});
 
+  const { updateAccountStatus } = useUpdateAccountStatus();
+
   const table = useReactTable({
     data: accounts,
-    columns: columns,
+    columns: getAccountColumns({ updateAccountStatus: updateAccountStatus }),
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -49,10 +52,10 @@ export function AccountsTable() {
 
   const { deleteAccount } = useDeleteAccount();
 
-  const { updateAccount } = useUpdateAccount();
+  const { updateAccountRole } = useUpdateAccountRole();
 
   async function handleUpdateAcount(dto: CreateAccountDTO) {
-    await updateAccount({ dto, accountId: selectedId! });
+    await updateAccountRole({ dto, accountId: selectedId! });
 
     setIsEditDialogOpen(false);
   }
@@ -71,7 +74,7 @@ export function AccountsTable() {
       />
       <Table.Content
         table={table}
-        columnsLength={columns.length}
+        columnsLength={getAccountColumns.length}
         placeholder="Nenhuma conta encontrada."
       />
 

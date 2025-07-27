@@ -7,8 +7,14 @@ import { AccountsTableActions } from "./accounts-table-actions"
 import { Icon } from "@/application/shared/components/ui/icon"
 import { Switch } from "@/application/shared/components/ui/switch"
 import { AccountRole } from "../account-role"
+import type { UseUpdateAccountStatus } from "../../../hooks/use-update-account-status"
 
-export const columns: ColumnDef<Account>[] = [
+interface GetAccountColumnsProps {
+  updateAccountStatus: UseUpdateAccountStatus['updateAccountStatus'];
+}
+
+export function getAccountColumns({ updateAccountStatus }: GetAccountColumnsProps): ColumnDef<Account>[] {
+  return [
   {
     accessorKey: "name",
     header: "Nome",
@@ -70,7 +76,12 @@ export const columns: ColumnDef<Account>[] = [
 
       return (
         <div className="flex justify-center">
-          <Switch onCheckedChange={() => {}} checked={value} />
+          <Switch onCheckedChange={() => {
+            updateAccountStatus({
+              dto: { isActive: !value },
+              accountId: row.original.id,
+            });
+          }} checked={value} />
         </div>
       )
     },
@@ -85,3 +96,4 @@ export const columns: ColumnDef<Account>[] = [
     },
   },
 ]
+}

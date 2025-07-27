@@ -39,3 +39,10 @@ export const updateAccountRoleDTO = createAccountDTO.pick({
 export type UpdateAccountRoleDTO = z.infer<typeof updateAccountRoleDTO>;
 export type UpdateAccountResponse = Account;
 
+
+export const updateAccountStatusDTO = z.object({
+  isActive: z.boolean(),
+});
+
+export type UpdateAccountStatusDTO = z.infer<typeof updateAccountStatusDTO>;
+export type UpdateAccountStatusResponse = Account;
