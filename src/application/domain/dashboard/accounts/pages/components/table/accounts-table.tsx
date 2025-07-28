@@ -30,9 +30,11 @@ export function AccountsTable() {
 
   const { updateAccountStatus } = useUpdateAccountStatus();
 
+  const columns = useMemo(() => getAccountColumns({ updateAccountStatus: updateAccountStatus }), [updateAccountStatus]);
+
   const table = useReactTable({
     data: accounts,
-    columns: getAccountColumns({ updateAccountStatus: updateAccountStatus }),
+    columns: columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),

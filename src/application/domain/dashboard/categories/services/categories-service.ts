@@ -1,5 +1,5 @@
 import { ApiService } from "@/application/shared/services/api-service";
-import { type CreateCategoryBody, type CreateCategoryResponse, type GetCategoriesResponse, type UpdateCategoryBody, type UpdateCategoryResponse } from "./dto/categories-dto";
+import { type CreateCategoryBody, type CreateCategoryResponse, type GetCategoriesResponse, type UpdateCategoryBody, type UpdateCategoryResponse, type UpdateCategoryStatusBody, type UpdateCategoryStatusResponse } from "./dto/categories-dto";
 import { Colors, colorsMap } from "../pages/components/color-combobox/colorsMap";
 
 export class CategoriesService extends ApiService {
@@ -31,6 +31,10 @@ export class CategoriesService extends ApiService {
       ...dto,
       color: dto.color ? this.convertColorToHex(dto.color) : undefined,
     });
+  }
+
+  async updateCategoryStatus(dto: UpdateCategoryStatusBody, categoryId: string) {
+    return this.httpClient.patch<UpdateCategoryStatusResponse>(`${this.baseUrl}/${categoryId}/status`, dto);
   }
 
   async deleteCategory(categoryId: string) {

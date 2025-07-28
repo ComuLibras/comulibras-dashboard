@@ -31,3 +31,9 @@ export const updateCategoryBody = createCategoryBody.partial();
 export type UpdateCategoryBody = z.infer<typeof updateCategoryBody>;
 export type UpdateCategoryResponse = Category;
 
+export const updateCategoryStatusBody = z.object({
+  isActive: z.boolean(),
+});
+export type UpdateCategoryStatusBody = z.infer<typeof updateCategoryStatusBody>;
+export type UpdateCategoryStatusResponse = Category;
+

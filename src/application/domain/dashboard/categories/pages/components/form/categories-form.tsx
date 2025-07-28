@@ -80,6 +80,7 @@ export function CategoriesForm({ onSubmit, submitLabel, initialValues }: Props) 
                   onSelect={(color) => field.onChange(color.hex)}
                   placeholder="Selecione a cor"
                   emptyMessage="Nenhuma cor encontrada."
+                  align="end"
                 />
                 </FormControl>
                 <FormMessage />

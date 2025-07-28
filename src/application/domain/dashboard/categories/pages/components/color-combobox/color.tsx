@@ -10,7 +10,7 @@ export function Color({ color, hideHex = false }: Props) {
   const label = colorsMap[color];
 
   return (
-    <div className="flex justify-between items-center gap-2">
+    <div className="flex justify-between items-center gap-2 w-full">
       <div className="flex items-center gap-2">
         <div className="size-6 rounded flex items-center justify-center" style={{ backgroundColor: `${label.hex}1a`, }}>
           <Icon name={label.icon} className="size-4" color={label.hex} />
@@ -21,9 +21,7 @@ export function Color({ color, hideHex = false }: Props) {
       </div>
 
       {!hideHex && (
-        <div className="flex items-center">
-          <span className="flex text-xs text-muted-foreground">{label.hex}</span>
-        </div>
+        <span className="flex text-xs text-muted-foreground">{label.hex}</span>
       )}
 
     </div>

@@ -17,9 +17,10 @@ interface Props<T> {
   emptyMessage?: string;
   placeholder?: string;
   getValue: (value: T) => string;
+  align?: "start" | "end" | "center";
 }
 
-export function Autocomplete<T>({ value, className, renderButton, items, renderItem, onSelect, emptyMessage, placeholder, getValue }: Props<T>) {
+export function Autocomplete<T>({ value, className, renderButton, items, renderItem, onSelect, emptyMessage, placeholder, getValue, align = "start" }: Props<T>) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -42,7 +43,7 @@ export function Autocomplete<T>({ value, className, renderButton, items, renderI
           </Button>
         </FormControl>
       </PopoverTrigger>
-      <PopoverContent align="start" className={cn("w-full p-0 left-0", className)}>
+      <PopoverContent align={align} className={cn("w-full p-0 left-0", className)}>
         <Command>
           <CommandInput
             placeholder={placeholder}

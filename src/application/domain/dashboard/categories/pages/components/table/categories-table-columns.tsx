@@ -5,8 +5,14 @@ import { Button } from "@/application/shared/components/ui/button"
 import { Icon, type IconProps } from "@/application/shared/components/ui/icon"
 import { Switch } from "@/application/shared/components/ui/switch"
 import { CategoriesTableActions } from "./categories-table-actions"
+import type { UseUpdateCategoryStatus } from "../../../hooks/use-update-category-status"
 
-export const columns: ColumnDef<Category>[] = [
+type GetCategoriesColumnsProps = {
+  updateCategoryStatus: UseUpdateCategoryStatus['updateCategoryStatus'];
+}
+
+export function getCategoriesColumns({ updateCategoryStatus }: GetCategoriesColumnsProps): ColumnDef<Category>[] {
+  return [
   {
     accessorKey: "icon",
     header: "Ícone",
@@ -76,7 +82,12 @@ export const columns: ColumnDef<Category>[] = [
 
       return (
         <div className="flex justify-center">
-          <Switch onCheckedChange={() => {}} checked={value} />
+          <Switch onCheckedChange={() => {
+            updateCategoryStatus({
+              dto: { isActive: !value },
+              categoryId: row.original.id,
+            });
+          }} checked={value} />
         </div>
       )
     },
@@ -90,4 +101,5 @@ export const columns: ColumnDef<Category>[] = [
       return <CategoriesTableActions category={category} />
     },
   },
-] 
+]
+}

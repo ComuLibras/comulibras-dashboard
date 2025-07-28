@@ -5,18 +5,19 @@ import { type UpdateCategoryBody } from "@/application/domain/dashboard/categori
 import { Table } from "@/application/shared/components/table";
 import { useTable } from "@/application/shared/hooks/use-table";
 import {
-    type ColumnFiltersState,
-    type SortingState,
-    type VisibilityState,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable
+  type ColumnFiltersState,
+  type SortingState,
+  type VisibilityState,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable
 } from "@tanstack/react-table";
 import { useMemo, useState } from 'react';
 import { CategoriesForm } from "../form/categories-form";
-import { columns } from "./categories-table-columns";
+import { getCategoriesColumns } from "./categories-table-columns";
+import { useUpdateCategoryStatus } from "../../../hooks/use-update-category-status";
 
 export function CategoriesTable() {
   const { categories } = useGetCategories();
@@ -25,6 +26,10 @@ export function CategoriesTable() {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] =
     useState<VisibilityState>({});
+
+  const { updateCategoryStatus } = useUpdateCategoryStatus();
+
+  const columns = useMemo(() => getCategoriesColumns({ updateCategoryStatus }), [updateCategoryStatus]);
 
   const table = useReactTable({
     data: categories,
@@ -71,7 +76,7 @@ export function CategoriesTable() {
       />
       <Table.Content
         table={table}
-        columnsLength={columns.length}
+        columnsLength={getCategoriesColumns.length}
         placeholder="Nenhuma categoria encontrada."
       />
 
