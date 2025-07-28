@@ -6,6 +6,8 @@ import { Icon } from "@/application/shared/components/ui/icon"
 import { Switch } from "@/application/shared/components/ui/switch"
 import { SentencesTableActions } from "./sentences-table-actions"
 import type { UseUpdateSentenceStatus } from "../../../hooks/use-update-sentence-status"
+import { CategorySelect } from "../form/category-select"
+import { SentenceVideoThumb } from "./sentence-video-thumb"
 
 type GetSentencesColumnsProps = {
   updateSentenceStatus: UseUpdateSentenceStatus['updateSentenceStatus'];
@@ -16,39 +18,7 @@ export function getSentencesColumns({ updateSentenceStatus }: GetSentencesColumn
   {
     accessorKey: "videoUrl",
     header: "Vídeo",
-    cell: ({ row }) => {
-      const videoUrl = row.getValue("videoUrl") as string;
-      // Extract video ID from YouTube URL to create thumbnail
-      const videoId = videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/)?.[1];
-      const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : '';
-      
-      return (
-        <div className="flex">
-          {thumbnailUrl ? (
-            <button 
-              onClick={() => {
-                // TODO: Open video modal in the future
-                console.log('Open video modal for:', videoUrl);
-              }}
-              className="relative hover:opacity-80 transition-opacity"
-            >
-              <img 
-                src={thumbnailUrl} 
-                alt="Video thumbnail" 
-                className="w-20 h-12 object-cover rounded"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Icon name="play-circle" className="size-8 text-white drop-shadow-lg" />
-              </div>
-            </button>
-          ) : (
-            <div className="w-20 h-12 bg-gray-200 rounded flex items-center justify-center">
-              <Icon name="video" className="size-6 text-gray-400" />
-            </div>
-          )}
-        </div>
-      )
-    },
+    cell: ({ row }) => <SentenceVideoThumb videoUrl={row.original.videoUrl} />,
   },
   {
     accessorKey: "content",
@@ -84,24 +54,14 @@ export function getSentencesColumns({ updateSentenceStatus }: GetSentencesColumn
     },
     cell: ({ row }) => {
       const category = row.original.category;
-      
-      if (!category) {
-        return (
-          <div className="flex items-center gap-2 px-3">
-            <span className="text-gray-400">Sem categoria</span>
-          </div>
-        );
-      }
+
+      const component = category 
+        ? <CategorySelect category={category} size="lg" /> 
+        : <span className="text-muted-foreground">Sem categoria</span>;
 
       return (
         <div className="flex items-center gap-2 px-3">
-          <div 
-            className="flex items-center justify-center size-8 rounded"
-            style={{ backgroundColor: `${category.color}2a` }}
-          >
-            <Icon name={category.icon} className="size-4 text-white" color={category.color} />
-          </div>
-          <span className="capitalize">{category.name}</span>
+          {component}
         </div>
       );
     },

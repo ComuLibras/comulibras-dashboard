@@ -7,7 +7,7 @@ import { Input } from "@/application/shared/components/ui/input";
 import { type Sentence, createSentenceBody, type CreateSentenceBody } from "../../../services/dto/sentences-dto";
 import { Autocomplete } from "@/application/shared/components/auto-complete";
 import { useGetCategories } from "../../../../categories/hooks/use-get-categories";
-import { Icon } from "@/application/shared/components/ui/icon";
+import { CategorySelect } from "./category-select";
 
 interface Props {
   onSubmit: (dto: CreateSentenceBody) => Promise<void>;
@@ -68,36 +68,11 @@ export function SentencesForm({ onSubmit, submitLabel, initialValues }: Props) {
                 <Autocomplete
                   value={field.value}
                   renderButton={() => {
-                    console.log(field.value, categories);
                     const selectedCategory = categories.find((cat) => cat.id === field.value);
-
-                    console.log(selectedCategory);
-                    return selectedCategory ? (
-                      <div className="flex items-center gap-2">
-                        <div 
-                          className="flex items-center justify-center size-6 rounded"
-                          style={{ backgroundColor: `${selectedCategory.color}2a` }}
-                        >
-                          <Icon name={selectedCategory.icon} className="size-3 text-white" color={selectedCategory.color} />
-                        </div>
-                        <span>{selectedCategory.name}</span>
-                      </div>
-                    ) : (
-                      <span className="text-gray-500">Selecione uma categoria</span>
-                    );
+                    return <CategorySelect category={selectedCategory!} />;
                   }}
                   items={categories}
-                  renderItem={(category) => (
-                    <div className="flex items-center gap-2">
-                      <div 
-                        className="flex items-center justify-center size-6 rounded"
-                        style={{ backgroundColor: `${category.color}2a` }}
-                      >
-                        <Icon name={category.icon} className="size-3 text-white" color={category.color} />
-                      </div>
-                      <span>{category.name}</span>
-                    </div>
-                  )}
+                  renderItem={(category) => <CategorySelect category={category} />}
                   getValue={(category) => category.id}
                   onSelect={(category) => field.onChange(category.id)}
                   placeholder="Selecione a categoria"
