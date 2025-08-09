@@ -9,8 +9,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { ThemeToggle } from "@/application/shared/components/theme/theme-toggle";
 import { Button } from "@/application/shared/components/ui/button";
+import { useMe } from "../accounts/hooks/use-me";
+
 
 export function DropdownMenuSettings() {
+  const { profile } = useMe();
   const navigate = useNavigate();
   const { isMobile } = useSidebar()
 
@@ -40,8 +43,8 @@ export function DropdownMenuSettings() {
             </AvatarFallback>
           </Avatar>
           <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-semibold">Amauri Lima</span>
-            <span className="truncate text-xs">amauri.lima@ufcg.edu.br</span>
+            <span className="truncate font-semibold">{profile?.name}</span>
+            <span className="truncate text-xs">{profile?.email}</span>
           </div>
           <ChevronsUpDown className="ml-auto size-4" />
         </SidebarMenuButton>
@@ -61,8 +64,8 @@ export function DropdownMenuSettings() {
               </AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-semibold">Amauri Lima</span>
-              <span className="truncate text-xs">amauri.lima@ufcg.edu.br</span>
+              <span className="truncate font-semibold">{profile?.name}</span>
+              <span className="truncate text-xs">{profile?.email}</span>
             </div>
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="icon">

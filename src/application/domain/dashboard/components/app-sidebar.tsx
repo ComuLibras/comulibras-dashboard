@@ -36,7 +36,7 @@ export function AppSidebar({ items }: Props) {
       <SidebarHeader className="flex items-center justify-start flex-row" >
         <Logo className={["h-fit size-24 transition-all ease-linear", !open && "size-12"]} />
         <h1 className="text-2xl">
-          {open && 'Sinaliza'}
+          {open && 'ComuLibras'}
         </h1>
       </SidebarHeader>
       <Separator />
