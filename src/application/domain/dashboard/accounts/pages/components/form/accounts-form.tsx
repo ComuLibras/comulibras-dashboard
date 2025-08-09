@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { Autocomplete } from "@/application/shared/components/auto-complete";
 import { AccountRole } from "../account-role";
+import { PasswordInput } from "@/application/shared/components/ui/password-input";
 
 interface Props {
   onSubmit(dto: CreateAccountDTO): Promise<void>;
@@ -76,6 +77,46 @@ export const AccountsForm: React.FC<Props> = ({ onSubmit, submitLabel, initialVa
                     onSelect={(role) => field.onChange(role)}
                     placeholder="Selecione a função"
                     emptyMessage="Nenhuma função encontrada."
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Senha</FormLabel>
+                <FormControl>
+                  <PasswordInput 
+                    {...field} 
+                    disabled={isEditing}
+                    autoComplete="new-password"
+                    placeholder="******" 
+                    className="h-12"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirmar senha</FormLabel>
+                <FormControl>
+                  <PasswordInput 
+                    {...field} 
+                    disabled={isEditing}
+                    autoComplete="confirm-password"
+                    placeholder="******" 
+                    className="h-12"
                   />
                 </FormControl>
                 <FormMessage />

@@ -2,7 +2,7 @@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/application/shared/components/ui/form";
 import { Input } from "@/application/shared/components/ui/input";
 import { PasswordInput } from "@/application/shared/components/ui/password-input";
-import { FormContainer, FormHeader, FormSubtitle, FormTitle, FormWrapper } from '../../components/form';
+import { FormContainer, FormHeader, FormTitle, FormWrapper } from '../../components/form';
 import { useSignInController } from "./sign-in-controller";
 import { Icon } from "@/application/shared/components/ui/icon";
 import { Link } from "react-router";
@@ -18,11 +18,11 @@ export const SignInPage: React.FC = () => {
     <FormContainer>
       <FormHeader>
         <FormTitle>Entre em sua conta</FormTitle>
-        <FormSubtitle
+        {/* <FormSubtitle
           text="Não tem uma senha?"
           span="Primeiro acesso"
           to="/auth/sign-up"
-        />
+        /> */}
       </FormHeader>
 
       <Form {...form}>
