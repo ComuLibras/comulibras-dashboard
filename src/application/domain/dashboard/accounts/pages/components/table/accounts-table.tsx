@@ -50,7 +50,16 @@ export function AccountsTable() {
   });
 
   const { selectedId, setIsEditDialogOpen } = useTable();
-  const initialValues = useMemo(() => accounts.find((account) => account.id === selectedId), [accounts, selectedId]);
+  const initialValues = useMemo(() => {
+    const account = accounts.find((account) => account.id === selectedId);
+    if (!account) return null;
+
+    return {
+      name: account.name,
+      email: account.email,
+      roleCode: account.role,
+    } as unknown as CreateAccountDTO;
+  }, [accounts, selectedId]);
 
   const { deleteAccount } = useDeleteAccount();
 
@@ -90,7 +99,7 @@ export function AccountsTable() {
         title="Editar usuário"
         subtitle="Edite os dados cadastrais do usuário"
       >
-        <AccountsForm onSubmit={handleUpdateAcount} submitLabel="Editar usuário" initialValues={initialValues} />
+        <AccountsForm onSubmit={handleUpdateAcount} submitLabel="Editar usuário" initialValues={initialValues!} />
       </Table.EditDialog>
     </div>
   )
