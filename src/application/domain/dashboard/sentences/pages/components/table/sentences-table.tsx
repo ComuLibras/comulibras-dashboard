@@ -5,14 +5,14 @@ import { type UpdateSentenceBody } from "@/application/domain/dashboard/sentence
 import { Table } from "@/application/shared/components/table";
 import { useTable } from "@/application/shared/hooks/use-table";
 import {
-    type ColumnFiltersState,
-    type SortingState,
-    type VisibilityState,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable
+  type ColumnFiltersState,
+  type SortingState,
+  type VisibilityState,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable
 } from "@tanstack/react-table";
 import { useMemo, useState } from 'react';
 import { SentencesForm } from "@/application/domain/dashboard/sentences/pages/components/form/sentences-form";
@@ -74,7 +74,7 @@ export function SentencesTable() {
         mappedView={{
           videoUrl: 'Vídeo',
           content: 'Frase',
-          category: 'Categoria',
+          category_name: 'Categoria',
           isActive: 'Ativo',
         }}
       />

@@ -40,7 +40,7 @@ export function getSentencesColumns({ updateSentenceStatus }: GetSentencesColumn
     ),
   },
   {
-    accessorKey: "category",
+    accessorKey: "category.name",
     header: ({ column }) => {
       return (
         <Button

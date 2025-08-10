@@ -6,6 +6,7 @@ import { DashboardLayout } from '@/application/domain/dashboard/layout';
 import { AccountsPage } from '@/application/domain/dashboard/accounts/pages';
 import { CategoriesPage } from '@/application/domain/dashboard/categories/pages';
 import { SentencesPage } from '@/application/domain/dashboard/sentences/pages';
+import { ProtectedRoute } from './protected-route';
 
 export const Router: React.FC = () => {
   return (
@@ -28,10 +29,12 @@ export const Router: React.FC = () => {
           </Route>
         </Route>
         
-        <Route path="dashboard" element={<DashboardLayout />}>
-          <Route path="categories" element={<CategoriesPage />} />
-          <Route path="sentences" element={<SentencesPage />} />
-          <Route path="accounts" element={<AccountsPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="dashboard" element={<DashboardLayout />}>
+            <Route path="categories" element={<CategoriesPage />} />
+            <Route path="sentences" element={<SentencesPage />} />
+            <Route path="accounts" element={<AccountsPage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
