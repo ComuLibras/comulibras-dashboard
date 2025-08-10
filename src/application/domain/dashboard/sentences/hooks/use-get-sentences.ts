@@ -9,5 +9,5 @@ export function useGetSentences() {
     queryFn: sentencesService.getSentences.bind(sentencesService),
   });
 
-  return { sentences: data?.data ?? [], total: data?.total ?? 0, isLoading };
+  return { sentences: data?.data ?? [], isLoading };
 } 

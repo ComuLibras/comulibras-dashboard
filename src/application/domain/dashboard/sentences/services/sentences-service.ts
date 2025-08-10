@@ -23,7 +23,6 @@ export class SentencesService extends ApiService {
 
     return {
       data: data.data.sentences,
-      total: data.data.totalSentences,
     }
   }
 
