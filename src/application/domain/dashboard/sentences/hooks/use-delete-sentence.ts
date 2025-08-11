@@ -21,5 +21,5 @@ export function useDeleteSentence() {
     },
   });
 
-  return { deleteSentence, ...rest };
+  return { deleteSentence, ...rest, isLoading: rest.isPending };
 } 

@@ -1,21 +1,22 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { Button } from "@/application/shared/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/application/shared/components/ui/form";
 import { Input } from "@/application/shared/components/ui/input";
 import { type Sentence, createSentenceBody, type CreateSentenceBody } from "../../../services/dto/sentences-dto";
 import { Autocomplete } from "@/application/shared/components/auto-complete";
 import { useGetCategories } from "../../../../categories/hooks/use-get-categories";
 import { CategorySelect } from "./category-select";
+import { LoadingButton } from "@/application/shared/components/ui/loading-button";
 
 interface Props {
   onSubmit: (dto: CreateSentenceBody) => Promise<void>;
   submitLabel: string;
   initialValues?: Sentence;
+  isLoading: boolean;
 }
 
-export function SentencesForm({ onSubmit, submitLabel, initialValues }: Props) {
+export function SentencesForm({ onSubmit, submitLabel, initialValues, isLoading }: Props) {
   const { categories } = useGetCategories();
   
   const form = useForm({
@@ -84,9 +85,9 @@ export function SentencesForm({ onSubmit, submitLabel, initialValues }: Props) {
           )}
         />
 
-        <Button type="submit" className="w-full">
+        <LoadingButton isLoading={isLoading} type="submit" className="w-full">
           {submitLabel}
-        </Button>
+        </LoadingButton>
       </form>
     </Form>
   );

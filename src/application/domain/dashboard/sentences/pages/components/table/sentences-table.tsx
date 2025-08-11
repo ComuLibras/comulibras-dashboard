@@ -51,9 +51,9 @@ export function SentencesTable() {
   const { selectedId, setIsEditDialogOpen } = useTable();
   const initialValues = useMemo(() => sentences.find((sentence) => sentence.id === selectedId), [sentences, selectedId]);
 
-  const { deleteSentence } = useDeleteSentence();
+  const { deleteSentence, isLoading: isDeleteLoading } = useDeleteSentence();
 
-  const { updateSentence } = useUpdateSentence();
+  const { updateSentence, isLoading: isUpdateLoading } = useUpdateSentence();
 
   async function handleUpdateSentence(dto: UpdateSentenceBody) {
     await updateSentence({ dto, sentenceId: selectedId! });
@@ -88,13 +88,14 @@ export function SentencesTable() {
         title="Tem certeza que deseja excluir essa frase?"
         subtitle="Essa ação não poderá ser desfeita. Isso excluirá essa frase permanentemente."
         onConfirm={handleDeleteSentence}
+        isLoading={isDeleteLoading}
       />
 
       <Table.EditDialog
         title="Editar frase"
         subtitle="Edite os dados da frase"
       >
-        <SentencesForm onSubmit={handleUpdateSentence} submitLabel="Editar frase" initialValues={initialValues} />
+        <SentencesForm isLoading={isUpdateLoading} onSubmit={handleUpdateSentence} submitLabel="Editar frase" initialValues={initialValues} />
       </Table.EditDialog>
     </div>
   );

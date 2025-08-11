@@ -23,5 +23,5 @@ export function useUpdateSentence() {
     },
   });
 
-  return { updateSentence, ...rest };
+  return { updateSentence, ...rest, isLoading: rest.isPending };
 } 

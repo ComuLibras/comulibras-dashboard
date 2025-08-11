@@ -23,5 +23,5 @@ export function useUpdateCategory() {
     },
   });
 
-  return { updateCategory, ...rest };
+  return { updateCategory, ...rest, isLoading: rest.isPending };
 } 

@@ -1,5 +1,4 @@
 import { createAccountDTO, type CreateAccountDTO, Roles } from "@/application/domain/dashboard/accounts/services/dto/account-dto";
-import { Button } from "@/application/shared/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/application/shared/components/ui/form";
 import { Input } from "@/application/shared/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,14 +6,16 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 import { Autocomplete } from "@/application/shared/components/auto-complete";
 import { AccountRole } from "../account-role";
 import { PasswordInput } from "@/application/shared/components/ui/password-input";
+import { LoadingButton } from "@/application/shared/components/ui/loading-button";
 
 interface Props {
   onSubmit(dto: CreateAccountDTO): Promise<void>;
   submitLabel: string;
   initialValues?: CreateAccountDTO;
+  isLoading: boolean;
 }
 
-export const AccountsForm: React.FC<Props> = ({ onSubmit, submitLabel, initialValues }) => {
+export const AccountsForm: React.FC<Props> = ({ onSubmit, submitLabel, initialValues, isLoading }) => {
   const isEditing = !!initialValues;
 
   const form = useForm<CreateAccountDTO>({
@@ -125,7 +126,9 @@ export const AccountsForm: React.FC<Props> = ({ onSubmit, submitLabel, initialVa
           />
         </div>
 
-        <Button type="submit" disabled={(isSubmitted && !isValid) || !isDirty} className="w-full">{submitLabel}</Button>
+        <LoadingButton isLoading={isLoading} type="submit" disabled={(isSubmitted && !isValid) || !isDirty} className="w-full">
+          {submitLabel}
+        </LoadingButton>
       </form>
     </Form>
   );

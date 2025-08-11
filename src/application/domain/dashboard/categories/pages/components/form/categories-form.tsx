@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { Button } from "@/application/shared/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/application/shared/components/ui/form";
 import { Input } from "@/application/shared/components/ui/input";
 import { type Category, createCategoryBody, type CreateCategoryBody } from "../../../services/dto/categories-dto";
@@ -10,14 +9,16 @@ import { Color } from "../color-combobox/color";
 import { colorsMap } from "../color-combobox/colorsMap";
 import { iconNames } from "lucide-react/dynamic";
 import { IconItem } from "../icon-combobox/iconItem";
+import { LoadingButton } from "@/application/shared/components/ui/loading-button";
 
 interface Props {
   onSubmit: (dto: CreateCategoryBody) => Promise<void>;
   submitLabel: string;
   initialValues?: Category;
+  isLoading: boolean;
 }
 
-export function CategoriesForm({ onSubmit, submitLabel, initialValues }: Props) {
+export function CategoriesForm({ onSubmit, submitLabel, initialValues, isLoading }: Props) {
   const form = useForm({
     resolver: zodResolver(createCategoryBody),
     defaultValues: initialValues,
@@ -90,9 +91,9 @@ export function CategoriesForm({ onSubmit, submitLabel, initialValues }: Props) 
         </div>
 
 
-        <Button type="submit" className="w-full">
+        <LoadingButton isLoading={isLoading} type="submit" className="w-full">
           {submitLabel}
-        </Button>
+        </LoadingButton>
       </form>
     </Form>
   );

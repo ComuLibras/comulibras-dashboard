@@ -21,5 +21,5 @@ export function useDeleteCategory() {
     },
   });
 
-  return { deleteCategory, ...rest };
+  return { deleteCategory, ...rest, isLoading: rest.isPending };
 } 

@@ -8,7 +8,7 @@ import React from "react";
 
 export function SentencesContent() {
   const { setIsAddDialogOpen } = useTable();
-  const { createSentence } = useCreateSentence();
+  const { createSentence, isLoading } = useCreateSentence();
 
   async function handleCreateSentence(dto: CreateSentenceBody) {
     await createSentence({ dto });
@@ -23,7 +23,7 @@ export function SentencesContent() {
         title="Criar frase"
         subtitle="Crie uma nova frase para o sistema"
       >
-        <SentencesForm onSubmit={handleCreateSentence} submitLabel="Criar frase" />
+        <SentencesForm onSubmit={handleCreateSentence} submitLabel="Criar frase" isLoading={isLoading} />
       </Table.AddDialog>
     </React.Fragment>
   );

@@ -22,5 +22,5 @@ export function useCreateSentence() {
     },
   });
 
-  return { createSentence, ...rest };
+  return { createSentence, ...rest, isLoading: rest.isPending };
 } 

@@ -9,7 +9,7 @@ import React from "react";
 
 export function CategoriesContent() {
   const { setIsAddDialogOpen } = useTable();
-  const { createCategory } = useCreateCategory();
+  const { createCategory, isLoading } = useCreateCategory();
 
   async function handleCreateCategory(dto: CreateCategoryBody) {
     await createCategory({ dto });
@@ -24,7 +24,7 @@ export function CategoriesContent() {
         title="Criar categoria"
         subtitle="Crie uma nova categoria para organizar as frases"
       >
-        <CategoriesForm onSubmit={handleCreateCategory} submitLabel="Criar categoria" />
+        <CategoriesForm isLoading={isLoading} onSubmit={handleCreateCategory} submitLabel="Criar categoria" />
       </Table.AddDialog>
     </React.Fragment>
   );

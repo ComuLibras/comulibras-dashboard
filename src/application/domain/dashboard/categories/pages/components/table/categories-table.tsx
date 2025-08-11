@@ -51,9 +51,9 @@ export function CategoriesTable() {
   const { selectedId, setIsEditDialogOpen } = useTable();
   const initialValues = useMemo(() => categories.find((category) => category.id === selectedId), [categories, selectedId]);
 
-  const { deleteCategory } = useDeleteCategory();
+  const { deleteCategory, isLoading: isDeleteLoading } = useDeleteCategory();
 
-  const { updateCategory } = useUpdateCategory();
+  const { updateCategory, isLoading } = useUpdateCategory();
 
   async function handleUpdateCategory(dto: UpdateCategoryBody) {
     await updateCategory({ dto, categoryId: selectedId! });
@@ -84,13 +84,14 @@ export function CategoriesTable() {
         title="Tem certeza que deseja excluir essa categoria?"
         subtitle="Essa ação não poderá ser desfeita. Isso excluirá essa categoria permanentemente."
         onConfirm={() => deleteCategory({ categoryId: selectedId! })}
+        isLoading={isDeleteLoading}
       />
 
       <Table.EditDialog
         title="Editar categoria"
         subtitle="Edite os dados da categoria"
       >
-        <CategoriesForm onSubmit={handleUpdateCategory} submitLabel="Editar categoria" initialValues={initialValues} />
+        <CategoriesForm isLoading={isLoading} onSubmit={handleUpdateCategory} submitLabel="Editar categoria" initialValues={initialValues} />
       </Table.EditDialog>
     </div>
   )

@@ -8,7 +8,7 @@ import { AccountsTable } from "./components/table/accounts-table";
 
 export function AccountsPageContent() {
   const { setIsAddDialogOpen } = useTable();
-  const { createAccount } = useCreateAccount();
+  const { createAccount, isLoading } = useCreateAccount();
 
   async function handleCreateAccount(dto: CreateAccountDTO) {
     await createAccount(dto);
@@ -24,7 +24,7 @@ export function AccountsPageContent() {
         title="Adicionar usuário"
         subtitle="Crie um novo usuário"
       >
-        <AccountsForm onSubmit={handleCreateAccount} submitLabel="Adicionar usuário" />
+        <AccountsForm isLoading={isLoading} onSubmit={handleCreateAccount} submitLabel="Adicionar usuário" />
       </Table.AddDialog>
     </React.Fragment>
   )

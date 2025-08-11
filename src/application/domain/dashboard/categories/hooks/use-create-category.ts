@@ -22,5 +22,5 @@ export function useCreateCategory() {
     },
   });
 
-  return { createCategory, ...rest };
+  return { createCategory, ...rest, isLoading: rest.isPending };
 } 

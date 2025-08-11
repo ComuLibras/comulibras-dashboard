@@ -61,9 +61,9 @@ export function AccountsTable() {
     } as unknown as CreateAccountDTO;
   }, [accounts, selectedId]);
 
-  const { deleteAccount } = useDeleteAccount();
+  const { deleteAccount, isLoading: isDeleteLoading } = useDeleteAccount();
 
-  const { updateAccountRole } = useUpdateAccountRole();
+  const { updateAccountRole, isLoading: isUpdateLoading } = useUpdateAccountRole();
 
   async function handleUpdateAcount(dto: CreateAccountDTO) {
     await updateAccountRole({ dto, accountId: selectedId! });
@@ -93,14 +93,15 @@ export function AccountsTable() {
         title="Tem certeza que deseja excluir esse usuário?"
         subtitle="Essa ação não poderá ser desfeita. Isso excluirá esse usuário permanentemente."
         onConfirm={() => deleteAccount({ accountId: selectedId! })}
+        isLoading={isDeleteLoading}
       />
 
       <Table.EditDialog
         title="Editar usuário"
         subtitle="Edite os dados cadastrais do usuário"
       >
-        <AccountsForm onSubmit={handleUpdateAcount} submitLabel="Editar usuário" initialValues={initialValues!} />
+        <AccountsForm isLoading={isUpdateLoading} onSubmit={handleUpdateAcount} submitLabel="Editar usuário" initialValues={initialValues!} />
       </Table.EditDialog>
     </div>
-  )
+  );
 }

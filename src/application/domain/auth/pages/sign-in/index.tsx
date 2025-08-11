@@ -5,13 +5,13 @@ import { PasswordInput } from "@/application/shared/components/ui/password-input
 import { FormContainer, FormHeader, FormTitle, FormWrapper } from '../../components/form';
 import { useSignInController } from "./sign-in-controller";
 import { Icon } from "@/application/shared/components/ui/icon";
-import { Button } from "@/application/shared/components/ui/button";
 import { Separator } from "@/application/shared/components/ui/separator";
 
 import Google from '@/application/assets/google.svg';
+import { LoadingButton } from "@/application/shared/components/ui/loading-button";
 
 export const SignInPage: React.FC = () => {
-  const { form, handleSubmit, isSubmitted, isValid } = useSignInController();
+  const { form, handleSubmit, isSubmitted, isValid, isLoading } = useSignInController();
 
   return (
     <FormContainer>
@@ -69,9 +69,9 @@ export const SignInPage: React.FC = () => {
           />
 
           <div className="flex flex-col gap-6 mt-6">
-            <Button type="submit" disabled={!isValid && isSubmitted} className="w-full" size="lg">
+            <LoadingButton isLoading={isLoading} type="submit" disabled={!isValid && isSubmitted} className="w-full" size="lg">
               Acessar minha conta
-            </Button>
+            </LoadingButton>
 
             <div className="flex items-center justify-center gap-2 w-full">
               <Separator className="flex-1" />
@@ -79,10 +79,10 @@ export const SignInPage: React.FC = () => {
               <Separator className="flex-1" />
             </div>
 
-            <Button type="submit" disabled={!isValid && isSubmitted} variant='outline' size="lg" className="w-full">
+            <LoadingButton isLoading={isLoading} type="submit" disabled={!isValid && isSubmitted} variant='outline' size="lg" className="w-full">
               <img src={Google} alt="Google" className="w-8 h-8 mr-2" />
               Entrar com Google
-            </Button>
+            </LoadingButton>
           </div>
         </FormWrapper>
       </Form>
