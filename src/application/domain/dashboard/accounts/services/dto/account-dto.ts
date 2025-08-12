@@ -30,6 +30,9 @@ export const createAccountDTO = z.object({
   role: z.enum(Roles, { error: 'A permissão do usuário é obrigatória' }),
   password: z.string().min(8, 'A senha deve conter pelo menos 8 caracteres'),
   confirmPassword: z.string().min(8, 'A senha deve conter pelo menos 8 caracteres'),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: 'As senhas não coincidem',
+  path: ['confirmPassword'],
 });
 
 export type CreateAccountDTO = z.infer<typeof createAccountDTO>;
