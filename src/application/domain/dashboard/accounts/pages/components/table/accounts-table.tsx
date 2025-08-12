@@ -58,8 +58,8 @@ export function AccountsTable() {
     return {
       name: account.name,
       email: account.email,
-      roleCode: account.role,
-    } as unknown as CreateAccountDTO;
+      role: account.role,
+    } as CreateAccountDTO;
   }, [accounts, selectedId]);
 
   const { deleteAccount, isLoading: isDeleteLoading } = useDeleteAccount();
