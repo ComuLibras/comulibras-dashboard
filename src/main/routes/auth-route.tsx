@@ -1,12 +1,11 @@
 
-import { makeAuthService } from "@/application/domain/auth/services/make-auth-service";
+import { useMe } from "@/application/domain/dashboard/accounts/hooks/use-me";
 import { Navigate, Outlet } from "react-router";
 
 export function AuthRoute() {
-  const authService = makeAuthService();
-  const { accessToken } = authService.getToken();
+  const { profile } = useMe();
 
-  if (accessToken) {
+  if (profile) {
     return <Navigate to="/dashboard/categories" replace />;
   }
 

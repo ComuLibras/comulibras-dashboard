@@ -1,5 +1,6 @@
 import { LucideFolder, LucideListVideo, LucideUsersRound } from "lucide-react";
 import type { Items } from "./components/app-sidebar";
+import { Roles } from "./accounts/services/dto/account-dto";
 
 export const layoutItems: Items[] = [
   {
@@ -19,5 +20,6 @@ export const layoutItems: Items[] = [
     url: '/dashboard/accounts',
     Icon: LucideUsersRound,
     isActive: true,
+    rolesAllowed: [Roles.ADMIN],
   },
 ];

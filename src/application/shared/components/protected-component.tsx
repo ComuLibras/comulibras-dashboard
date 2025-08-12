@@ -1,24 +1,21 @@
-
 import { useMe } from "@/application/domain/dashboard/accounts/hooks/use-me";
 import type { Roles } from "@/application/domain/dashboard/accounts/services/dto/account-dto";
-import { Navigate, Outlet, useNavigate } from "react-router";
 
 type Props = {
   allowedRoles: Roles[];
+  children: React.ReactNode;
 }
 
-export function ProtectedRoute({ allowedRoles }: Props) {
+export function ProtectedComponent({ allowedRoles, children }: Props) {
   const { profile } = useMe();
-  const navigate = useNavigate();
 
   if (!profile?.role) {
-    return <Navigate to="/auth/sign-in" replace />;
+    return null;
   }
 
   if (!allowedRoles.includes(profile.role)) {
-    navigate(-1)
-    return null
+    return null;
   }
 
-  return <Outlet />;
+  return children;
 }

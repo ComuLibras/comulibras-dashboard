@@ -7,6 +7,7 @@ import { AccountsPage } from '@/application/domain/dashboard/accounts/pages';
 import { CategoriesPage } from '@/application/domain/dashboard/categories/pages';
 import { SentencesPage } from '@/application/domain/dashboard/sentences/pages';
 import { ProtectedRoute } from './protected-route';
+import { Roles } from '@/application/domain/dashboard/accounts/services/dto/account-dto';
 
 export const Router: React.FC = () => {
   return (
@@ -29,11 +30,13 @@ export const Router: React.FC = () => {
           </Route>
         </Route>
         
-        <Route element={<ProtectedRoute />}>
+        <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN, Roles.MANAGER]} />}>
           <Route path="dashboard" element={<DashboardLayout />}>
             <Route path="categories" element={<CategoriesPage />} />
             <Route path="sentences" element={<SentencesPage />} />
-            <Route path="accounts" element={<AccountsPage />} />
+            <Route element={<ProtectedRoute allowedRoles={[Roles.ADMIN]} />}>
+              <Route path="accounts" element={<AccountsPage />} />
+            </Route>
           </Route>
         </Route>
       </Routes>

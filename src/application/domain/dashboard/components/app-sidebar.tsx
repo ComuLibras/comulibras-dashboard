@@ -17,12 +17,14 @@ import { NavLink, useLocation } from "react-router";
 import { NavUser } from "./nav-user";
 import { Logo } from "@/application/shared/components/logo";
 import { cn } from "@/application/shared/lib/utils";
+import { useMe } from "../accounts/hooks/use-me";
 
 export interface Items {
   title: string;
   url: string;
   Icon?: LucideIcon;
   isActive?: boolean;
+  rolesAllowed?: string[];
 }
 
 interface Props {
@@ -32,6 +34,8 @@ interface Props {
 export function AppSidebar({ items }: Props) {
   const { open } = useSidebar();
   const location = useLocation();
+
+  const { profile } = useMe();
 
   return (
     <Sidebar variant="sidebar" collapsible="icon">
@@ -47,8 +51,16 @@ export function AppSidebar({ items }: Props) {
         <SidebarGroup>
           <SidebarGroupLabel>Páginas</SidebarGroupLabel>
           <SidebarMenu>
-            {items.map(({ title, url, Icon }) => {
+            {items.map(({ title, url, Icon, rolesAllowed }) => {
               const isActive = location.pathname === url;
+
+              if (rolesAllowed && !profile) {
+                return null;
+              }
+
+              if (rolesAllowed && !rolesAllowed.includes(profile!.role)) {
+                return null;
+              }
               
               return (
                 <SidebarMenuItem key={url}>
