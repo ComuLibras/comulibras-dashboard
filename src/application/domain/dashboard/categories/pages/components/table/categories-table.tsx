@@ -81,7 +81,7 @@ export function CategoriesTable() {
       />
       <Table.Content
         table={table}
-        columnsLength={getCategoriesColumns.length}
+        columnsLength={columns.length}
         placeholder="Nenhuma categoria encontrada."
       />
 

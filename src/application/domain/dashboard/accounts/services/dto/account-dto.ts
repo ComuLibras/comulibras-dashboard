@@ -3,7 +3,7 @@ import { z } from "zod";
 export enum Roles {
   ADMIN = 'ADMIN',
   MANAGER = 'SENTENCE_ADMIN',
-  USER = 'USER',
+  // USER = 'USER',
 }
 
 export interface Account {

@@ -90,7 +90,7 @@ export function AccountsTable() {
       />
       <Table.Content
         table={table}
-        columnsLength={getAccountColumns.length}
+        columnsLength={columns.length}
         placeholder="Nenhuma conta encontrada."
       />
 

@@ -16,11 +16,7 @@ const map: Record<Roles, Role> = {
   [Roles.MANAGER]: {
     label: "Administrador de frases",
     icon: "list-video",
-  },
-  [Roles.USER]: {
-    label: "Usuário",
-    icon: "user",
-  },
+  }
 }
 
 interface Props {
@@ -28,7 +24,6 @@ interface Props {
 }
 
 export function AccountRole({ role }: Props) {
-  console.log(role)
   const mappedRole = map?.[role];
 
   if (!mappedRole) {
