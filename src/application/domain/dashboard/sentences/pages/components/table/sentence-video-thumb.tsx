@@ -7,7 +7,7 @@ type Props = {
 
 export function SentenceVideoThumb({ videoUrl }: Props) {
   const thumbnail = useMemo(() => {
-    const videoId = videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/)?.[1];
+    const videoId = videoUrl.match(/(?:youtube\.com\/watch\?v=|youtube\.com\/shorts\/|youtu\.be\/)([^&\n?#]+)/)?.[1];
     const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : '';
 
     return thumbnailUrl;
