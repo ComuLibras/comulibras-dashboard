@@ -19,9 +19,10 @@ import { AccountsForm } from "../form/accounts-form";
 import { getAccountColumns } from "./accounts-table-columns";
 import type { CreateAccountDTO } from "../../../services/dto/account-dto";
 import { useUpdateAccountStatus } from "../../../hooks/use-update-account-status";
+import TableLoading from "@/components/mvpblocks/skeleton-table-1";
 
 export function AccountsTable() {
-  const { accounts } = useGetAccounts();
+  const { accounts, isLoading } = useGetAccounts();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -69,6 +70,10 @@ export function AccountsTable() {
     await updateAccountRole({ dto, accountId: selectedId! });
 
     setIsEditDialogOpen(false);
+  }
+
+  if (isLoading) {
+    return <TableLoading rowCount={10} columnCount={6} showTopBar={true} showFilter={true} showColumnToggle={true} bodyClassName="px-0" />;
   }
 
   return (

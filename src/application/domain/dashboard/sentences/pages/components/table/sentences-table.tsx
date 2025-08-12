@@ -18,9 +18,10 @@ import { useMemo, useState } from 'react';
 import { SentencesForm } from "@/application/domain/dashboard/sentences/pages/components/form/sentences-form";
 import { getSentencesColumns } from "./sentences-table-columns";
 import { useUpdateSentenceStatus } from "../../../hooks/use-update-sentence-status";
+import TableLoading from "@/components/mvpblocks/skeleton-table-1";
 
 export function SentencesTable() {
-  const { sentences } = useGetSentences();
+  const { sentences, isLoading } = useGetSentences();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -63,6 +64,10 @@ export function SentencesTable() {
 
   async function handleDeleteSentence() {
     return deleteSentence({ sentenceId: selectedId! });
+  }
+
+  if (isLoading) {
+    return <TableLoading rowCount={10} columnCount={5} showTopBar={true} showFilter={true} showColumnToggle={true} bodyClassName="px-0" />;
   }
 
   return (

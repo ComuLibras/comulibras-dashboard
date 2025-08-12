@@ -18,6 +18,7 @@ import { useMemo, useState } from 'react';
 import { CategoriesForm } from "../form/categories-form";
 import { getCategoriesColumns } from "./categories-table-columns";
 import { useUpdateCategoryStatus } from "../../../hooks/use-update-category-status";
+import TableLoading from "@/components/mvpblocks/skeleton-table-1";
 
 export function CategoriesTable() {
   const { categories } = useGetCategories();
@@ -59,6 +60,10 @@ export function CategoriesTable() {
     await updateCategory({ dto, categoryId: selectedId! });
 
     setIsEditDialogOpen(false);
+  }
+
+  if (isLoading) {
+    return <TableLoading rowCount={10} columnCount={5} showTopBar={true} showFilter={true} showColumnToggle={true} bodyClassName="px-0" />;
   }
 
   return (
